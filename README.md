@@ -1,5 +1,9 @@
 # FitVids Backdrop module
 
+:warning: This module is minimally maintained. A more modern approach can be
+found in the [fitFrames module](https://github.com/backdrop-contrib/fitframes)
+which can be used for embedded videos or any other type of iframed content.
+
 ## Description
 
 This module uses the FitVids.js library for fluid width video embeds. It supports YouTube, Vimeo, Blip.tv and Kickstarter by default, and you should be able to use it with other video providers. You don't need it for pure HTML5 videos.
@@ -37,12 +41,14 @@ Bugs and Feature requests should be reported in the
 
 ## Current Maintainers
 
-- [Laryn Kragt Bakker](https://github.com/laryn) - [CEDC.org](https://cedc.org)
+- [Laryn Kragt Bakker](https://github.com/laryn)
 
 ## Credits
 
-- Ported to Backdrop CMS by [Laryn Kragt Bakker](https://github.com/laryn) - [CEDC.org](https://cedc.org).
+- Ported to Backdrop CMS by [Laryn Kragt Bakker](https://github.com/laryn)
+- Port to Backdrop was sponsored by [CEDC.org](https://cedc.org).
 - Maintained for Drupal by [Derek Ahmedzai](https://github.com/derekahmedzai).
+- The original FitVids script was written by [Dave Rupert](https://github.com/davatron5000).
 
 ## License
 

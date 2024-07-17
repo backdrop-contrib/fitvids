@@ -11,7 +11,7 @@ function fitvids_permission() {
   return array(
     'administer fitvids' => array(
       'title' => t('Administer the FitVids module'),
-    )
+    ),
   );
 }
 
@@ -94,12 +94,17 @@ function fitvids_admin_settings($form, &$form_state) {
 
 }
 
+/**
+ *
+ */
 function fitvids_admin_settings_validate ($form, &$form_state) {
 
 }
 
+/**
+ *
+ */
 function fitvids_admin_settings_submit ($form, &$form_state) {
-  //debug($form_state['values']);
   $config = config('fitvids.settings');
   $values = $form_state['values'];
   $config->set('selectors', $values['selectors']);
@@ -118,13 +123,13 @@ function fitvids_admin_settings_submit ($form, &$form_state) {
  */
 function fitvids_preprocess_page(&$variables) {
 
-  //Performance: Skip this entirely for AJAX requests
+  // Performance: Skip this entirely for AJAX requests.
   if (!backdrop_is_html()) {
     return;
   }
   $config = config('fitvids.settings');
 
-  // Generate the custom vendor selectors
+  // Generate the custom vendor selectors.
   $fitvids_customselectors = $config->get('customselectors');
   $fitvids_customselectors_array = array();
   if ($fitvids_customselectors != '') {
@@ -141,26 +146,30 @@ function fitvids_preprocess_page(&$variables) {
     $custom_selectors = '';
   }
 
-  // Get fitvids containers
+  // Get fitvids containers.
   $fitvids_selectors = $config->get('selectors');
   $fitvids_selectors_array = explode(PHP_EOL, $fitvids_selectors);
 
   // Simplify markup?
   $simplifymarkup = $config->get('simplifymarkup');
 
-  // Export the variables to Backdrop.settings
+  // Export the variables to Backdrop.settings.
   backdrop_add_js(array('fitvids' => array(
     'custom_domains' => $fitvids_customselectors_array,
     'selectors' => $fitvids_selectors_array,
     'simplifymarkup' => $simplifymarkup,
   )), 'setting');
+
+  if (module_exists('fitframes') && user_access('administer fitvids')) {
+    backdrop_set_message(t('You have both the FitVids and FitFrames modules enabled. Don\'t forget to uninstall FitVids after transitioning to FitFrames.'), 'warning');
+  }
 }
 
 /**
 * Implements hook_config_info().
 */
 function fitvids_config_info() {
-$prefixes['fitvids.settings'] = array(
+  $prefixes['fitvids.settings'] = array(
     'label' => t('FitVids'),
     'group' => t('Configuration'),
   );
